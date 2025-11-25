@@ -4,6 +4,7 @@ import { PERSONAL_INFO } from '../constants';
 import SectionTitle from './SectionTitle';
 import Button from './Button';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -27,29 +28,33 @@ const Contact: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Create mailto link with form data
-      const subject = encodeURIComponent(formData.subject);
-      const body = encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      // Initialize EmailJS with your public key
+      emailjs.init('4y0zGESCV2nMVT9VS');
+      
+      const result = await emailjs.send(
+        'service_96g6egq', // Your Service ID
+        'template_c529ill', // Your Template ID
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        '4y0zGESCV2nMVT9VS' // Your Public Key
       );
-      const mailtoLink = `mailto:bhusala452@gmail.com?subject=${subject}&body=${body}`;
-      
-      // Open default email client
-      window.location.href = mailtoLink;
-      
-      // Show success message
-      setTimeout(() => {
-        setIsSubmitting(false);
+
+      if (result.text === 'OK') {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
-        
-        // Reset status after 3 seconds
-        setTimeout(() => setSubmitStatus('idle'), 3000);
-      }, 500);
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
-      setIsSubmitting(false);
+      console.error('Error sending email:', error);
       setSubmitStatus('error');
-      setTimeout(() => setSubmitStatus('idle'), 3000);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus('idle'), 5000);
     }
   };
 
@@ -258,6 +263,28 @@ const Contact: React.FC = () => {
             </form>
           </motion.div>
         </div>
+
+        {/* Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-12"
+        >
+          <div className="bg-gradient-to-br from-surface via-surface to-surface/80 p-2 rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56516.23456789012!2d84.0!3d27.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3994fb2bdd456789%3A0x1234567890abcdef!2sKawasoti%2C%20Nawalpur%2C%20Nepal!5e0!3m2!1sen!2snp!4v1234567890123!5m2!1sen!2snp"
+              width="100%"
+              height="400"
+              style={{ border: 0, borderRadius: '12px' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

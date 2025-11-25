@@ -60,8 +60,15 @@ const Navbar: React.FC = () => {
             className="flex-shrink-0 flex items-center cursor-pointer"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <Code2 className="h-8 w-8 text-primary mr-2" />
-            <span className="font-bold text-xl text-white tracking-tight">{PERSONAL_INFO.name}</span>
+            <img 
+              src="/logo.png" 
+              alt="Logo" 
+              className="h-20 w-20 object-contain brightness-0 invert"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+              }}
+            />
           </motion.div>
           
           <div className="hidden md:block">

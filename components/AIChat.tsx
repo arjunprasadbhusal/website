@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const AIChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hi there! 👋 I'm Arjun's portfolio assistant. Ask me anything about his projects, skills, experience, or how to contact him!" }
+    { role: 'model', text: "Hi! 👋 I'm an expert assistant for Arjun's portfolio.\n\nI can help with:\n• React, TypeScript, Node.js, Laravel, SQL\n• How-to guides with code examples\n• Best practices & debugging\n• Arjun's projects & experience\n\nAsk me anything!" }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -133,7 +133,7 @@ const AIChat: React.FC = () => {
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Ask about my skills..."
+                  placeholder="Ask about tech, code examples, or Arjun..."
                   className="w-full bg-background border border-white/10 rounded-full px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 transition-colors pr-12"
                   disabled={isLoading}
                 />
