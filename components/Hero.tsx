@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
               </div>
             </motion.div>
             
-            <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            <motion.h1 variants={itemVariants} className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Building <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary animate-pulse">Digital</span> <br/>
               Experiences
             </motion.h1>
