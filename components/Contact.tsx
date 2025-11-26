@@ -37,8 +37,8 @@ const Contact: React.FC = () => {
         {
           to_name: 'Arjun Bhusal', // Your name (recipient)
           to_email: 'bhusala452@gmail.com', // Your email (hardcoded recipient)
-          from_name: formData.name, // Sender's name
-          reply_to: formData.email, // Sender's email (for reply-to)
+          name: formData.name, // Sender's name
+          email: formData.email, // Sender's email (for reply-to)
           user_email: formData.email, // Sender's email
           subject: formData.subject,
           message: formData.message,
