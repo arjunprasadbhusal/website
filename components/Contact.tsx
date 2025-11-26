@@ -35,8 +35,11 @@ const Contact: React.FC = () => {
         'service_96g6egq', // Your Service ID
         'template_c529ill', // Your Template ID
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          to_name: 'Arjun Bhusal', // Your name (recipient)
+          to_email: 'bhusala452@gmail.com', // Your email (hardcoded recipient)
+          from_name: formData.name, // Sender's name
+          reply_to: formData.email, // Sender's email (for reply-to)
+          user_email: formData.email, // Sender's email
           subject: formData.subject,
           message: formData.message,
         },
